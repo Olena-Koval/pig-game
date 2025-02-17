@@ -1,5 +1,7 @@
-import "./style.css";
+// Importamos los estilos CSS para la aplicación
 
+import "./style.css";
+// Seleccionamos el elemento con id "app" y añadimos la estructura HTML del juego dinámicamente
 document.querySelector("#app").innerHTML = `
     <main>
       <section class="player player--0 player--active">
@@ -28,57 +30,63 @@ document.querySelector("#app").innerHTML = `
 `;
 
 // variables de estado en JS y selectores DOMXS
-
+// Secciones de cada jugador en el DOM
 // activePlayer -> variable de estado en JS
 const sectionPlayer0 = document.querySelector(".player--0");
 const sectionPlayer1 = document.querySelector(".player--1");
+// Puntuaciones totales de los jugadores
 // score = [0,0] -> variable de estado en JS
 const score0 = document.querySelector("#score--0");
 const score1 = document.querySelector("#score--1");
-
+// Puntuaciones actuales en la ronda
 // current -> variable de estado en JS
 const currentScore0 = document.querySelector("#current--0");
 const currentScore1 = document.querySelector("#current--1");
-
+// Botones de la interfaz
 const btnNew = document.querySelector(".btn--new");
 const btnHold = document.querySelector(".btn--hold");
 const btnRoll = document.querySelector(".btn--roll");
-
+// Imagen del dado
 const imgDice = document.querySelector(".dice");
-
+// Variables de estado del juego
 let score, currentScore, activePlayer;
 
 const initData = () => {
+  // Inicializar los valores de las variables de estado
   // init state variables
-  score = [0, 0];
-  currentScore = 0;
-  activePlayer = 0;
+  score = [0, 0]; // Puntuaciones de los jugadores
+  currentScore = 0; // Puntuación actual de la ronda
+  activePlayer = 0; // Jugador activo (0 = Jugador 1, 1 = Jugador 2)
 
   // init DOM elements
-
+  // Reiniciar los elementos del DOM
   imgDice.classList.add("hidden");
   score0.textContent = 0;
   score1.textContent = 0;
   currentScore0.textContent = 0;
   currentScore1.textContent = 0;
 };
-
+// Llamamos a la función para iniciar el juego
 initData();
 
 btnRoll.addEventListener("click", throwDice);
 
 function throwDice() {
+  // Generar un número aleatorio entre 1 y 6
   // generar un número del 1 al 6
   const diceNumber = Math.trunc(Math.random() * 6 + 1);
+  // Mostrar el dado con la imagen correspondiente
   // mostrar el número
   imgDice.classList.remove("hidden");
   imgDice.src = `dice-${diceNumber}.png`;
-  // si no es 1....
+  // Si el dado NO es 1, se actualiza la puntuación
   if (diceNumber !== 1) updateCurrentScore(diceNumber);
-  else switchPlayer();
+  else switchPlayer();      // Si es 1, cambia de jugador
 }
 
 function updateCurrentScore(diceNumber) {
+  // Sumar el número del dado a la puntuación actual
+  // Mostrar la puntuación en el jugador activo
   currentScore += diceNumber; // current = current + diceNumber
   if (activePlayer === 0) currentScore0.textContent = currentScore;
   else currentScore1.textContent = currentScore;
@@ -86,6 +94,7 @@ function updateCurrentScore(diceNumber) {
 
 function switchPlayer() {
   {
+    // Reiniciar la puntuación actual antes de cambiar de jugador
     // currentScore se tiene que resetear a 0 y también en el DOM!!!
     resetCurrentScore();
 
@@ -110,6 +119,7 @@ function switchPlayer() {
 
 function resetCurrentScore() {
   currentScore = 0; // current = current + diceNumber
+  // Actualizar la puntuación en el DOM
   if (activePlayer === 0) currentScore0.textContent = currentScore;
   else currentScore1.textContent = currentScore;
 }
