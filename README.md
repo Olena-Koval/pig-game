@@ -23,7 +23,7 @@
 
 Este es un proyecto desarrollado con Vite para jugar al Pig Game  
 
-[Ver el juego en funcionamiento](https://Olena-Koval.github.io/pig-game/)  
+Puedes jugarlo aquí: [Pig Game en GitHub Pages](https://olena-koval.github.io/pig-game/)
 
 ## Instalación y ejecución  
 
